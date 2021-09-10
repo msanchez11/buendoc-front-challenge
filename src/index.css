@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;700&display=swap');
+
+
+:root {
+  --main-font: "Work Sans",sans-serif;
+  --alt-font: "Montserrat",sans-serif;
+  --conforta-font: "Comfortaa",cursive;
+  --primary-color: #2020a8;
+  --secondary-color: #5d59ff;
+  --tertiary-color: #d8d2ff;
+  --dark-secondary-color: #4144d9;
+  --light-violet: #f2f0ff;
+  --badge-color: #ff7675;
+  --badge-default: rgba(0,0,0,0.25);
+  --badge-error: #ff4d4f;
+  --badge-success: #5cdbd3;
+  --system-white: #ffffff;
+  --system-black: #000000;
+  --system-gray: #f5f7fa;
+  --font-color: #8297ad;
+  --separator-color: #e4ecf2;
+  --btn-disabled: #f3f5f9;
+  --label-input: #131d66;
+  --picker-color: #5e768f;
+  --input-color: #5e768f;
+  --border-color: #b1becc;
+  --msg-success: #0fab87;
+  --msg-warning: #d9b85f;
+  --tag-violet: var(--light-violet);
+  --tag-violet-color: var(--dark-secondary-color);
+  --tag-green: var(--success-color);
+  --tag-green-color: var(--msg-success);
+  --tag-red: var(--error-color);
+  --tag-red-color: #d9595d;
+  --tag-gold: #fffdf0;
+  --tag-gold-color: var(--msg-warning);
+  --tabs-color-active: #433fe7;
+  --tabs-color: var(--step-wait);
+  --tabs-border: #dddddd;
+  --calendar-color: rgba(3,8,82,0.65);
+  --calendar-color-light: rgba(3,8,82,0.15);
+  --calendar-primary-light: rgba(204,204,255,0.403273);
+  --calendar-btn-hover: #d0d0d0;
+  --ckb-disabled: #f5f5f5;
+  --ckb-disabled-border: #d9d9d9;
+  --ckb-disabled-font: #bfbfbf;
+  --progress-success: #ccccff;
+  --menu-item-bkg: #f8f7ff;
+  --success-color: #ddfff2;
+  --success-icon-color: #52c41a;
+  --success-font-color: #626e80;
+  --info-color: #ebebff;
+  --warning-color: #fdf6de;
+  --warning-border: #ffe07e;
+  --warning-icon: #faad14;
+  --error-color: #fff1f0;
+  --error-border: #ff7675;
+  --error-icon: #f5222d;
+  --border-picker: #e8ebf0;
+  --step-wait: rgba(3,8,82,0.25);
+  --table-selector: #f8f7ff;
+  --elevation-1: 0px 10px 30px 0px rgba(55,136,176,0.2);
+  --schedule-primary: var(--badge-success);
+  --schedule-secondary: #b5f5ec;
+  --schedule-font: #43b5b1;
+  --schedule-border: #43b5b1;
+  --schedule-border-list: #f0f0f0;
+  --card-color1: var(--badge-success);
+  --card-color2: var(--schedule-secondary);
+  --card-color3: var(--schedule-font);
+  --card-color4: #2e8f8f;
+  --box-shadow: 0px 0px 16px rgba(130,151,173,0.16);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
