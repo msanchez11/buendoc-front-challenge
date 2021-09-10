@@ -1,0 +1,24 @@
+.bodyHeader_main{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 20px 5%;
+}
+
+.add-professional-btn{
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  border-radius: 5px;
+}
+.add-professional-btn:hover{
+  background-color: var(--dark-secondary-color);
+  border-color: var(--dark-secondary-color);
+  border-radius: 5px;
+}
+.add-professional-btn:focus{
+  background-color: var(--dark-secondary-color);
+  border-color: var(--dark-secondary-color);
+  border-radius: 5px;
+}

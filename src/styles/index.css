@@ -72,6 +72,8 @@
   --card-color3: var(--schedule-font);
   --card-color4: #2e8f8f;
   --box-shadow: 0px 0px 16px rgba(130,151,173,0.16);
+
+  font-size: 14px;
 }
 
 * {

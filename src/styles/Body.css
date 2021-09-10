@@ -1,0 +1,40 @@
+.body{
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.body_header{
+  height: 10%;
+  width: 100%;
+}
+
+.body_main{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.body_table_main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 3%;
+}
+
+.body_table_footer{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height: 10%;
+  padding: 0 3%;
+  background-color: var(--separator-color);
+}
