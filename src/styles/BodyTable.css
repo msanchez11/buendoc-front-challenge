@@ -1,0 +1,35 @@
+
+.table{
+  width: 100%;
+  height: 100%;
+}
+
+.table-column{
+  font-family: var(--main-font);
+}
+
+.ant-table-thead > tr > th {
+  color: var(--primary-color);
+  font-weight: 400;
+}
+
+
+.form-wrapper{
+  font-family: var(--main-font);
+}
+.form-title label{
+  color: var(--primary-color);
+  color: red;
+}
+.form-name-section{
+ display: flex;
+ justify-content: space-between;
+}
+.form-name-section .ant-col{
+  width: 300px;
+}
+
+.form-sub-title label{
+  color: var(--font-color);
+  max-width: 400px;
+}

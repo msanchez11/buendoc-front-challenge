@@ -1,7 +1,6 @@
 import '../styles/Body.css';
 import BodyHeader from './body-components/BodyHeader';
 import BodyTable from './body-components/BodyTable';
-import BodyPagination from './body-components/BodyPagination';
 
 function Body() {
   return (
@@ -12,9 +11,6 @@ function Body() {
       <div className="body_main">
         <div className="body_table_main">
           <BodyTable />
-        </div>
-        <div className="body_table_footer">
-          <BodyPagination />
         </div>
       </div>
     </div>
