@@ -23,9 +23,10 @@
   font-weight: 400;
 }
 
-.table-avatar-item{
-  width: 20px;
-  height: 20px;
+.table-avatar-pro{
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
 }
 
 
@@ -66,4 +67,7 @@
 
 .form-upload-wrapper{
   margin-bottom: 20px;
+}
+.form-upload-img{
+  color: var(--font-color);
 }

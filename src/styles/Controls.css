@@ -1,4 +1,4 @@
-.bodyHeader_main{
+.controls{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -6,6 +6,10 @@
   width: 100%;
   padding: 20px 5%;
 }
+.search-btn{
+  width: 400px;
+}
+
 
 .add-professional-btn{
   background-color: var(--secondary-color);

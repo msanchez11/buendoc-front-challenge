@@ -5,7 +5,7 @@ function Header() {
   return (
     <div className="header_container">
       <span className="header-title">Profesionales</span>
-      <img src={Logo} alt="Buendoc." />
+      <img src={Logo} alt="Logo" />
     </div>
   )
 }

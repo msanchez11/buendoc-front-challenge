@@ -1,10 +1,18 @@
-import Layout from './components/Layout'
+import Header from './components/Header';
+import Content from './components/Content';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 function App() {
+
+  const queryClient = new QueryClient();
+
   return (
-    <div className="App">
-      <Layout />
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div className="App">
+        <Header />
+        <Content />
+      </div>
+    </QueryClientProvider>
   );
 }
 

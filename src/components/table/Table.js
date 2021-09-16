@@ -1,32 +1,27 @@
-import { Table, Space, Avatar, Spin, Image } from 'antd'
-import { UserOutlined } from '@ant-design/icons'
+import { useState } from 'react';
+import { Table, Space, Spin, Image } from 'antd'
+import { EditOutlined } from '@ant-design/icons'
 import '../../styles/BodyTable.css'
 import DeleteProfessional from './DeleteProfessional'
-import EditProfessional from './EditProfessional'
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
+import ModalEditProfessional from './ModalEditProfessional'
+import { useQuery } from 'react-query'
 
-const queryClient = new QueryClient()
-
-function BodyTable() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <TableData />
-    </QueryClientProvider>
-  )
-}
-
-const fetchProfessionals = async () => {
-  const res = await fetch('http://challenge.radlena.com/api/v1/professionals/');
+const fetchProfessionals = async (key) => {
+  const res = await fetch(`http://challenge.radlena.com/api/v1/professionals/?page=${key.queryKey[1]}`);
   return res.json();
 }
 
-
 function TableData() {
-
   const { Column } = Table;
-  const { data, status } = useQuery('languages', fetchProfessionals)
+  const [page, setPage] = useState(1);
+  const { data, status } = useQuery(['professionals', page], fetchProfessionals);
+  const [isOpen, setIsOpen] = useState(false);
+  const [userId, setUserId] = useState(null);
 
-  console.log(data.results)
+  function setCurrentUser(id) {
+    setIsOpen(true);
+    setUserId(id);
+  }
 
   return (
     <div className='table'>
@@ -43,17 +38,14 @@ function TableData() {
         status === 'success' && (
           <Table
             className='table'
-            rowKey="uid"
+            rowKey="id"
             dataSource={data.results}
-            onChange={() => console.log('Cambio en tabla')}
             pagination={{
               'style': { 'padding': '0 20px' },
-              'current': 1,
-              'pageSize': 8,
-              'total': data.results.length,
-              'onChange': function (page) {
-                console.log('Pagina cambiada')
-              }
+              'current': page,
+              'pageSize': 10,
+              'total': data.count,
+              'onChange': (page) => { setPage(page) }
             }}
           >
             <Column
@@ -61,11 +53,9 @@ function TableData() {
               title=""
               dataIndex="profile_image"
               key="profile_image"
-              render={() => (
-                //<img className='table-avatar-item' src={data.results.profile_image} alt='Avatar' />
-                //<Avatar size={30} icon={<UserOutlined />} />
+              render={(_, record) => (
                 < Space size='small'>
-                  <Image width={100} src={data.results.profile_image} alt='Avatar' />
+                  <Image className='table-avatar-pro' src={record.profile_image} alt='Dr. Avatar' />
                 </Space>
               )
               }
@@ -74,23 +64,23 @@ function TableData() {
             <Column align='center' className='table-column' title="APELLIDO" dataIndex="last_name" key="last_name" />
             <Column align='center' className='table-column' title="EMAIL" dataIndex="email" key="email" />
             <Column align='center' className='table-column' title="ID" dataIndex="id" key="id" />
-
             <Column
               align='center'
               title=""
               key="action"
-              render={() => (
+              render={(_, record) => (
                 <Space size="large">
-                  <EditProfessional />
-                  <DeleteProfessional />
+                  <EditOutlined onClick={() => { setCurrentUser(record.id) }} style={{ fontSize: '20px', color: 'var(--secondary-color)' }} />
+                  <DeleteProfessional currentUser={data.results.find(user => record.id === user.id)} />
                 </Space>
               )}
             />
           </Table >
         )
       }
+      {isOpen && <ModalEditProfessional currentUser={data.results.find(user => userId === user.id)} isOpen={isOpen} setIsOpen={setIsOpen} />}
     </div >
   )
 }
 
-export default BodyTable;
+export default TableData;
