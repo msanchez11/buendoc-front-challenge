@@ -5,10 +5,8 @@ import ModalAddProfessional from './ModalAddProfessional';
 
 const { Search } = Input;
 
-function Controls() {
+function Controls({ setSearchFilter }) {
   const [isOpen, setIsOpen] = useState(false);
-
-  const onSearch = value => console.log(value);
 
   const handleCloseModal = () => {
     setIsOpen(false);
@@ -20,7 +18,7 @@ function Controls() {
 
   return (
     <div className='controls'>
-      <Search className='search-btn' placeholder="Buscar por nombre" onSearch={onSearch} />
+      <Search className='search-btn' placeholder="Buscar por nombre" onSearch={setSearchFilter} />
       <Button
         className='add-professional-btn'
         onClick={handleOpenModal}

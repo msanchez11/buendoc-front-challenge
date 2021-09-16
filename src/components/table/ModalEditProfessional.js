@@ -76,7 +76,7 @@ function ModalEditProfessional({ isOpen, setIsOpen, currentUser }) {
           <Select
             mode="multiple"
             style={{ width: '100%' }}
-            placeholder="Elije al menos un idioma"
+            placeholder="Elije un idioma"
             onChange={() => console.log('+Idioma')}
             optionLabelProp="label"
           >

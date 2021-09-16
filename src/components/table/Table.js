@@ -11,12 +11,23 @@ const fetchProfessionals = async (key) => {
   return res.json();
 }
 
-function TableData() {
+function TableData({ searchFilter }) {
   const { Column } = Table;
   const [page, setPage] = useState(1);
   const { data, status } = useQuery(['professionals', page], fetchProfessionals);
   const [isOpen, setIsOpen] = useState(false);
   const [userId, setUserId] = useState(null);
+
+
+  function filterData() {
+    if (searchFilter === null || searchFilter === '') {
+      return data.results;
+    } else {
+      if ((searchFilter)) {
+        return data.results.filter(({ first_name }) => first_name.includes(searchFilter))
+      }
+    }
+  }
 
   function setCurrentUser(id) {
     setIsOpen(true);
@@ -39,7 +50,7 @@ function TableData() {
           <Table
             className='table'
             rowKey="id"
-            dataSource={data.results}
+            dataSource={filterData()}
             pagination={{
               'style': { 'padding': '0 20px' },
               'current': page,
