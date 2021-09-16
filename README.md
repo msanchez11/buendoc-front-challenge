@@ -1,26 +1,21 @@
-# Welcome to my BuendocChallenge
+# Bienvenidos a mi BuendocChallenge
 
-Here are the [instructions](http://challenge.radlena.com/).
+Anexo aqui las [instrucciones](http://challenge.radlena.com/).
 
-This project is made with the following stack:
-
+Este proyecto esta creado con el siguiente stack:
 - React
-- Typescript
 - React-Query
 - AntD
 
-## Available Scripts
-In the project directory, you can run:
+## Paso 1
+Clonar repositorio
 
-### 1st `clone repo`
-### 2nd `npm install`
-### 3rd `npm start`
+## Paso 2
+Correr `npm install`
 
-Runs the app in the development mode.
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Paso 3
+Correr `npm start`
 
+Abrir [http://localhost:3000](http://localhost:3000) para ser testeado.
 
-**Note: Enjoy it!**
-
-
-## Cheers!
+## Saludos!
