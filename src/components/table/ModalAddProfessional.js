@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import '../../styles/BodyTable.css';
-import { Modal, Form, Input, Select, Button, Upload, message } from 'antd';
+import { Modal, Form, Input, Select, Button, Upload } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { useQuery } from 'react-query';
 
@@ -12,58 +12,45 @@ const fetchLanguages = async () => {
 function ModalAddProfessional({ isOpen, handleCloseModal }) {
 
   const { data, status } = useQuery('languages', fetchLanguages)
-
   const [confirmLoading, setConfirmLoading] = useState(false);
 
-  const [proAvatar, setProAvatar] = useState(null);
-
+  const [profileImage, setProfileImage] = useState({})
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
   const [proEmail, setProEmail] = useState(null);
-
   const { Option } = Select;
-  const props = {
-    name: 'file',
-    maxCount: 1,
-    headers: {
-      authorization: 'authorization-text',
-    },
-    onChange(info) {
-      if (info.file.status !== 'uploading') {
-        console.log(info.file, info.fileList);
-      }
-      if (info.file.status === 'done') {
-        message.success(`${info.file.name} subido correctamente`);
-      } else if (info.file.status === 'error') {
-        message.error(`${info.file.name} ha fallado.`);
-      }
-    }
-  }
+  let formData = new FormData();
+  let postReq = new XMLHttpRequest();
 
-  const handleOk = () => {
+  function handleUpload({ fileList }) {
+    setProfileImage(fileList[0].originFileObj)
+  };
 
-    const postOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "profile_image": proAvatar,
-        "first_name": firstName,
-        "last_name": lastName,
-        "email": proEmail,
-        "is_active": true
-      })
-    };
-    fetch('http://challenge.radlena.com/api/v1/professionals/', postOptions)
-      .then(response => response.json())
-      .then(data => this.setState({ postId: data.id }));
+  const handleOk = (e) => {
+    e.preventDefault();
 
+    //Validacion de campos del Form
+
+    formData.append("profile_image", profileImage);
+    formData.append("first_name", firstName);
+    formData.append("last_name", lastName);
+    formData.append("email", proEmail);
+
+    postReq.open("POST", 'http://challenge.radlena.com/api/v1/professionals/', true);
+    postReq.send(formData);
 
     setConfirmLoading(true);
+
     setTimeout(() => {
       handleCloseModal();
       setConfirmLoading(false);
     }, 2000);
+
+    // POST OK message.succes Doctor Agregado.
+    // POST BAD message.error Error en la carga.
+
   };
+
   const handleCancel = () => {
     handleCloseModal(false);
   };
@@ -74,8 +61,11 @@ function ModalAddProfessional({ isOpen, handleCloseModal }) {
       width='700'
       title="Nuevo profesional:"
       visible={isOpen}
+      onOk={handleOk}
+      okText='Guardar'
+      confirmLoading={confirmLoading}
       onCancel={handleCancel}
-      footer={null}
+      cancelText='Cancelar'
     >
       <Form
         className='form-wrapper'
@@ -98,7 +88,12 @@ function ModalAddProfessional({ isOpen, handleCloseModal }) {
           </Form.Item>
         </div>
 
-        <Upload accept='image/*' className='form-upload-wrapper' {...props}>
+        <Upload
+          accept='image/*'
+          className='form-upload-wrapper'
+          maxCount='1'
+          beforeUpload={() => false}
+          onChange={handleUpload}>
           <Button className='form-upload-img' icon={<UploadOutlined />}>Subir imagen de perfil</Button>
         </Upload>
 
@@ -110,7 +105,6 @@ function ModalAddProfessional({ isOpen, handleCloseModal }) {
         </Form.Item>
 
         <Form.Item
-          rules={[{ required: true, message: 'Debe ingresar un idioma!' }]}
           className='form-title'
           label="Idiomas"
         >
@@ -137,7 +131,6 @@ function ModalAddProfessional({ isOpen, handleCloseModal }) {
           </Select>
         </Form.Item>
       </Form>
-
     </Modal >
   )
 }

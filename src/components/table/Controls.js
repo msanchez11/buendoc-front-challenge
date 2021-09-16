@@ -18,7 +18,7 @@ function Controls({ setSearchFilter }) {
 
   return (
     <div className='controls'>
-      <Search className='search-btn' placeholder="Buscar por nombre" onSearch={setSearchFilter} />
+      <Search className='search-btn' allowClear placeholder="Buscar por nombre" onSearch={setSearchFilter} />
       <Button
         className='add-professional-btn'
         onClick={handleOpenModal}

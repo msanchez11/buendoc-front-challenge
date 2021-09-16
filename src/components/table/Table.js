@@ -24,7 +24,7 @@ function TableData({ searchFilter }) {
       return data.results;
     } else {
       if ((searchFilter)) {
-        return data.results.filter(({ first_name }) => first_name.includes(searchFilter))
+        return data.results.filter(({ first_name }) => first_name.toUpperCase().includes(searchFilter.toUpperCase()))
       }
     }
   }

@@ -7,14 +7,27 @@ const fetchLanguages = async () => {
   const res = await fetch('http://challenge.radlena.com/api/v1/languages/');
   return res.json();
 }
+const fetchProfLang = async (key) => {
+  const res = await fetch(`http://challenge.radlena.com/api/v1/professional-languages/?professional__id=${key.queryKey[1]}`);
+  return res.json();
+}
 
 function ModalEditProfessional({ isOpen, setIsOpen, currentUser }) {
-
-  const { data, status } = useQuery('languages', fetchLanguages)
   const { Option } = Select;
   const [confirmLoading, setConfirmLoading] = useState(false);
+  const { data, status } = useQuery('languages', fetchLanguages);
+  const { data: info, status: state } = useQuery(['prof-lang', currentUser.id], fetchProfLang);
+
+  function getProfLanguages() {
+    console.log(state, info);
+    // Retornar null si no tiene idiomas (info === [])
+    // Retirnar [idioma, idioma] si tiene idiomas (info === [{},{},...])
+  }
+
 
   const handleOk = () => {
+    // Hacer PATCH sobre /profesional para actualizar data del Dr
+    // Haver POST sobre /professional-languages para insertar idiomas de un Dr x
     setConfirmLoading(true);
     setTimeout(() => {
       setIsOpen(false);
@@ -25,7 +38,6 @@ function ModalEditProfessional({ isOpen, setIsOpen, currentUser }) {
   const handleCancel = () => {
     setIsOpen(false);
   };
-
 
   return (
     <Modal
@@ -39,6 +51,7 @@ function ModalEditProfessional({ isOpen, setIsOpen, currentUser }) {
       cancelText={'Cancelar'}
       onCancel={handleCancel}
     >
+
       <Form
         className='form-wrapper'
         layout='vertical'
@@ -46,21 +59,26 @@ function ModalEditProfessional({ isOpen, setIsOpen, currentUser }) {
         <p className='form-sub-title'>Ingrese los datos del profesional </p>
         <div className='form-name-section'>
           <Form.Item
-            rules={[{ required: true, message: 'Debe ingresar un nombre!' }]}
             className='form-title'
             label="Nombre"
+            rules={[
+              {
+                required: true,
+                message: 'Please input your name',
+              },
+            ]}
           >
             <Input placeholder="Ejemplo: Nahuel" value={currentUser.first_name} />
           </Form.Item>
           <Form.Item
-            rules={[{ required: true, message: 'Debe ingresar un apellido!' }]}
+            rules={[{ required: true }]}
             className='form-title'
             label="Apellido">
             <Input placeholder="Ejemplo: Fernandez" value={currentUser.last_name} />
           </Form.Item>
         </div>
         <Form.Item
-          rules={[{ required: true, message: 'Debe ingresar un email!' }]}
+          rules={[{ required: true }]}
           className='form-title form-title-email'
           requiredMark='true'
           label="Email">
@@ -68,7 +86,6 @@ function ModalEditProfessional({ isOpen, setIsOpen, currentUser }) {
         </Form.Item>
 
         <Form.Item
-          rules={[{ required: true, message: 'Debe ingresar un idioma!' }]}
           className='form-title'
           label="Idiomas"
         >
@@ -79,6 +96,7 @@ function ModalEditProfessional({ isOpen, setIsOpen, currentUser }) {
             placeholder="Elije un idioma"
             onChange={() => console.log('+Idioma')}
             optionLabelProp="label"
+            defaultValue={getProfLanguages()}
           >
             {status === 'loading' && (<h3>Cargando idiomas.</h3>)}
             {status === 'error' && (<h3>Error: No hay idiomas disponibles.</h3>)}
